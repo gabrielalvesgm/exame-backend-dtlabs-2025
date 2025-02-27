@@ -1,0 +1,65 @@
+dtlab_test/
+→ Raiz do projeto. Aqui ficam os arquivos de configuração geral, como:
+
+.env (variáveis de ambiente, caso eu faça)
+requirements.txt (lista de pacotes Python)
+docker-compose.yaml (orquestração dos contêineres)
+Dockerfile (configuração do container da aplicação)
+README.md (documentação do projeto)
+dtlab_test/app/
+→ Pasta principal da aplicação, contendo todo o código-fonte do backend.
+
+dtlab_test/app/api/
+→ Contém os endpoints da API.
+
+dtlab_test/app/api/routes/
+→ Local dos arquivos que definem as rotas/endpoints:
+auth.py (rotas de autenticação)
+data.py (rotas para registro e consulta de dados dos sensores)
+health.py (rotas para monitoramento da saúde dos servidores)
+servers.py (rotas para registro e gerenciamento dos servidores)
+__init__.py
+
+dtlab_test/app/core/
+→ Contém configurações essenciais e de segurança.
+
+config.py (configurações gerais, como variáveis e conexões)
+security.py (implementação de JWT e outras configurações de segurança)
+__init__.py
+
+dtlab_test/app/db/
+→ Contém tudo relacionado ao banco de dados.
+
+models.py (modelos SQLAlchemy representando as tabelas, ex.: User, Server, SensorData)
+session.py (configuração e gerenciamento da sessão/engine do SQLAlchemy)
+repository.py (funções para CRUD e interações diretas com o banco)
+__init__.py
+
+dtlab_test/app/schemas/
+→ Contém os modelos Pydantic para validação de dados.
+
+auth.py (schemas para autenticação, ex.: UserRegister, UserLogin, Token)
+data.py (schemas para os dados dos sensores, ex.: SensorData)
+health.py (schemas para monitoramento, ex.: ServerHealth)
+servers.py (schemas para os servidores, ex.: ServerCreate, ServerResponse)
+__init__.py
+
+dtlab_test/app/services/
+→ Contém as regras de negócio da aplicação.
+
+auth_service.py (lógica de autenticação e criação de JWT)
+data_service.py (lógica para processar os dados dos sensores, validações adicionais, etc.)
+health_service.py (lógica para monitoramento da saúde dos servidores)
+server_service.py (lógica para cadastro e gerenciamento dos servidores, criação do ULID, etc.)
+__init__.py
+
+dtlab_test/app/tests/
+→ Contém os testes da aplicação (usando PyTest).
+
+test_auth.py (testes relacionados à autenticação)
+test_data.py (testes para registro e consulta de dados dos sensores)
+test_health.py (testes para monitoramento de saúde)
+test_servers.py (testes para registro e gerenciamento de servidores)
+
+dtlab_test/app/main.py
+→ Arquivo principal para rodar o FastAPI (ponto de entrada da aplicação).
