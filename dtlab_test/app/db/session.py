@@ -1,15 +1,11 @@
-# POSTGRES CONNECTION #app/db/session.py
-
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 
 #POSTGRES URL CONNECTION (env informations needed)
 SQLALCHEMY_DATABASE_URL = "postgresql://root:123456@localhost:5432/dtlabdb"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, build=engine)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, future=True)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, future=True)
 
-#Declarative base for models
 Base = declarative_base()
