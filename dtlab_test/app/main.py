@@ -1,7 +1,7 @@
 from fastapi import FastAPI
+from app.api.routes.data import router as data_router
+from fastapi.testclient import TestClient
 
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message:" "Hello World"}
+app.include_router(data_router, prefix="/data")

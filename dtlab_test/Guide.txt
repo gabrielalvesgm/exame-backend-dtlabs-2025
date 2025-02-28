@@ -1,0 +1,13 @@
+        **step by step of ''how i learned and developed this software"**
+
+After structuring all the software folders, I will start by developing a small test for better understanding. After watching some videos and reading the FastAPI documentation, I will use the TestClient model, create a POST endpoint for the test, and simulate a request to the "/data" endpoint. I will create a payload with sensor data and use the client to capture the response.
+
+I will use PyTest to perform the test.
+
+Step by step again, first: create a Schema with Pydanti (just like a Springboot class)
+in app/schemas/data.py we've created the SensorData class that inherits BaseModel (an Pydantic class), in the fields we've used [Optional[float] = None] wich means that this data can be an float or None (if its not ''informed'') Optinal will be used in ours Sensor.
+
+Starting software development:
+I started creating the models in db/models.py, i created users, servers, sensors, using the knowledge that i had on Springboot because the models are equivalent to Entitys in JPA
+i used SQLAlchemy wich is the ORM for the tables, etc...
+Then, now im going to create the Schemas (equivalent to DTOs) using Pydantic models. in schemas/data.py
