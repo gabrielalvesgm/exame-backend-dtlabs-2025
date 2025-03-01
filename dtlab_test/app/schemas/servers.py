@@ -23,4 +23,4 @@ class ServerResponse(ServerBase):
     server_ulid: str
     
     class Config:
-        orm_mode = True
+        from_attributes = True

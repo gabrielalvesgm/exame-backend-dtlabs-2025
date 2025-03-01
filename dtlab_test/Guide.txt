@@ -1,4 +1,5 @@
         **step by step of ''how i learned and developed this software"**
+.\\venv\Scripts\Activate  
 
 After structuring all the software folders, I will start by developing a small test for better understanding. After watching some videos and reading the FastAPI documentation, I will use the TestClient model, create a POST endpoint for the test, and simulate a request to the "/data" endpoint. I will create a payload with sensor data and use the client to capture the response.
 

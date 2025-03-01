@@ -25,4 +25,4 @@ class SensorDataResponse(SensorDataBase):
     id: int
     
     class Config:
-        orm_mode = True #Enable commpatibility with ORM Objects
+        from_attributes = True #Enable commpatibility with ORM Objects
