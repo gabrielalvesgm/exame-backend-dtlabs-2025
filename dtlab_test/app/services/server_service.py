@@ -1,7 +1,7 @@
 #BUSINESS LOGIC FOR SERVERS #app/services/server.py
 
 from sqlalchemy.orm import Session
-from app.db import repository
+from app.db import repository, models
 from app.schemas.servers import ServerCreate, ServerUpdate
 
 
@@ -10,14 +10,13 @@ def create_server_service(db: Session, server_data: ServerCreate):
     return repository.create_server(db, server_data)
 
 
-# Service function to retrieve a server by ULID
+#Service function to retrieve a server by ULID
 def get_server_by_ulid_service(db: Session, server_ulid: str):
     return repository.get_server_by_ulid(db, server_ulid)
 
-
-# Service function to list servers with pagination
-def list_servers_service(db: Session, skip: int = 0, limit: int = 10):
-    return repository.list_servers(db, skip, limit)
+#Service function to list all servers
+def list_all_servers_service(db: Session):
+    return db.query(models.Server).all()
 
 
 # Service function to update an valid server

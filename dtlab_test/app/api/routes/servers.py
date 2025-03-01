@@ -8,7 +8,7 @@ from app.schemas.servers import ServerCreate, ServerUpdate, ServerResponse
 from app.services.server_service import (
     create_server_service,
     get_server_by_ulid_service,
-    list_servers_service,
+    list_all_servers_service,
     update_server_service,
     delete_server_service,
 )
@@ -31,6 +31,11 @@ def create_server(server: ServerCreate, db: Session = Depends(get_db)):
     return create_server_service(db, server)
 
 
+#GET ALL SERVERS
+@router.get("/list", response_model=List[ServerResponse])
+def list_all_servers(db: Session = Depends(get_db)):
+    return list_all_servers_service(db)
+
 #GET SERVER BY ULID ENDPOINT
 @router.get("/{server_ulid}", response_model=ServerResponse)
 def read_server(server_ulid:str, db:Session = Depends(get_db)):
@@ -38,12 +43,6 @@ def read_server(server_ulid:str, db:Session = Depends(get_db)):
     if not db_server:
         raise HTTPException(status_code=404, detail="Server not found")
     return db_server
-
-
-#GET WITH PAGINATION ENDPOINT
-@router.get("/{server_ulid}", response_model=ServerResponse)
-def read_servers(skip: int=0, limit: int=10, db: Session = Depends(get_db)):
-    return list_servers_service(db, skip, limit)
 
 
 #UPDATE SERVERS ENDPOINT
@@ -59,6 +58,6 @@ def update_server(server_ulid: str, server: ServerUpdate, db:Session=Depends(get
 @router.delete("/{server_ulid}", response_model=ServerResponse)
 def delete_server(server_ulid:str, db:Session = Depends(get_db)):
     db_server = delete_server_service(db, server_ulid)
-    if not db_server():
+    if not db_server:
         raise HTTPException(status_code=404, detail="Server Not Found")
     return db_server

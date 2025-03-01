@@ -37,7 +37,7 @@ def register(user:UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-@router.post("login")
+@router.post("/login")
 def login(user: UserLogin, db:Session = Depends(get_db)):
     """
     Endpoint to authenticate a user and return a JWT token.

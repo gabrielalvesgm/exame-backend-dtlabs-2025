@@ -1,5 +1,6 @@
 #BUSINESS LOGIC FOR AUTHENTICATION #/app/services/auth_service.py
 
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.db import models
 from app.schemas.users import UserCreate, UserLogin
@@ -30,7 +31,8 @@ def get_user_by_username(db: Session, username: str):
     """
     Get a a user from the database based on username.
     """
-    return db.query(models.User).filter(models.User.username == username).first()
+    normalized_username = username.lower()
+    return db.query(models.User).filter(func.lower(models.User.username) == normalized_username).first()
 
 
 
