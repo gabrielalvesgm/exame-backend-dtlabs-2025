@@ -34,5 +34,14 @@ class SensorDataCreate(SensorDataBase):
 class SensorDataResponse(SensorDataBase):
     id: int
     
+    
+#Schema for returning a sensor data response
+class SensorDataQueryResponse(BaseModel):
+    timestamp: datetime
+    value: float
+
+
     class Config:
         from_attributes = True #Enable commpatibility with ORM Objects
+        
+        
