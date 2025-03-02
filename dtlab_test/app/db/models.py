@@ -39,7 +39,7 @@ class SensorData(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     server_ulid = Column(String, ForeignKey("servers.server_ulid"), nullable=False)
-    timestamp = Column(DateTime, nullable=False)
+    timestamp = Column(DateTime(timezone=True), nullable=False)
     temperature = Column(Float, nullable=True)
     humidity = Column(Float, nullable=True)
     voltage = Column(Float, nullable=True)

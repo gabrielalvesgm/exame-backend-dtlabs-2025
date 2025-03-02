@@ -25,7 +25,7 @@ def get_server_by_ulid(db: Session, server_ulid: str):
 
 #UPDATES AN VALID SERVER DATA
 def update_server(db: Session, server_ulid: str, server_data: ServerUpdate):
-    db_server = db.query(Server).filter(Server.server_ulid == server_ulid).first
+    db_server = db.query(Server).filter(Server.server_ulid == server_ulid).first()
     if db_server:
         for key, value in server_data.model_dump(exclude_unset=True).items():
             setattr(db_server, key, value)
