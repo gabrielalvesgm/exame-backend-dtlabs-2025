@@ -5,3 +5,4 @@ pip install "fastapi[standard]" #install fastAPI standart
 pip install sqlalchemy pytest #installs pytest for tests and sqlalchemy as orm
 pip install psycopg2-binary #installs PostgreSQL driver
 pip install ulid-py
+pip install dotenv
