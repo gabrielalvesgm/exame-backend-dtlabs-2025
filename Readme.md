@@ -1,13 +1,21 @@
-Requirements for test: <br>
-Python (obligatory) - Using python 3.1.3 <br>
-FastAPI(obligatory) -  <br>
-PostgreSQL (obligatory) should be executed in a docker <br>
-Pytest for tests (obligatory) <br>
-sqlalchemy as ORM <br>
+#dtLabsProject - IoT Backend
 
+#Pré-requisitos
+Docker e Docker Compose instalados
 
+Como rodar o app:
+1. Clone o repositório:
 
-Creating an virtual enviorement: <br>
-1° step: python -m venv .venv <br> 
-to initialize it: .\venv\Scripts\Activate  or  .\\venv\Scripts\Activate <br>
-to run the fastapi server, type: fastapi dev main.py (main file).py <br>
+   git clone https://github.com/gabrielalvesgm/exame-backend-dtlabs-2025
+
+   cd dtlabsproject
+
+2. construa e suba os containers:
+
+docker-compose up --build
+
+Possivelmente rodando na porta: http://localhost:8000/docs
+
+3. Execute os testes com:
+
+docker exec -it dtlab_api pytest
