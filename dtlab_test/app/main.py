@@ -16,19 +16,19 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# Include the authentication routes under the "/auth" prefix
+#Include the authentication routes under the "/auth" prefix
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 
-# Include the server routes under the "/servers" prefix
+# nclude the server routes under the "/servers" prefix
 app.include_router(servers.router, prefix="/servers", tags=["Servers"])
 
-# Include the sensor data routes under the '/data' prefix
+#Include the sensor data routes under the '/data' prefix
 app.include_router(data.router, prefix="/data", tags=["Sensor Data"])
 
-# Include the server health routes under the "/health" prefix
+#Include the server health routes under the "/health" prefix
 app.include_router(health.router, prefix="/health", tags=["Health"])
 
-# Custom OpenAPI Security Schema Configuration
+#Custom OpenAPI Security Schema Configuration
 from fastapi.openapi.models import SecurityScheme
 from typing import Dict, Any
 

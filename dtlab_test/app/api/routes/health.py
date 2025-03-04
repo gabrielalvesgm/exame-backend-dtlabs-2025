@@ -9,15 +9,15 @@ from app.db import models
 from app.core.security import decode_access_token
 from app.schemas.health import ServerHealthResponse
 
-# Configure basic logging with timestamp, level and message
+#Configure basic logging with timestamp, level and message
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 
 router = APIRouter()
 
-# OAuth2 scheme to extract the JWT token from the header
+#OAuth2 scheme to extract the JWT token from the header
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
-# Dependency to create a DB Session
+#Dependency to create a DB Session
 def get_db():
     db = SessionLocal()
     try:

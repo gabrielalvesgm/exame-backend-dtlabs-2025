@@ -9,10 +9,8 @@ from app.db.session import SessionLocal
 
 router = APIRouter()
 
-#Use HTTPBearer for simple token authentication
 bearer_scheme = HTTPBearer()
 
-#Dependency to obtain a database session
 def get_db():
     db = SessionLocal()
     try:
@@ -20,7 +18,6 @@ def get_db():
     finally:
         db.close()
 
-# Dependency to get the current user from the token
 def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
     if credentials.scheme.lower() != "bearer":
         raise HTTPException(

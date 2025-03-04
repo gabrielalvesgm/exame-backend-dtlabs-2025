@@ -1,0 +1,9 @@
+# Python version: 3.13.1
+fastapi==0.95.0
+uvicorn[standard]==0.22.0
+sqlalchemy==2.0.0
+psycopg2-binary==2.9.10
+PyJWT==2.6.0
+bcrypt==4.0.1
+python-dotenv==0.21.0
+pytest==8.3.4

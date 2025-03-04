@@ -23,7 +23,7 @@ def get_db():
     finally:
         db.close()
         
-# Dependency to get the current user (returns username)
+#Dependency to get the current user (returns username)
 def get_current_user(token: str = Depends(oauth2_scheme)):
     payload = decode_access_token(token)
     username = payload.get("sub")
@@ -34,7 +34,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         )
     return username
 
-# SensorData POST endpoint to register a sensor data record
+#SensorData POST endpoint to register a sensor data record
 @router.post("/", response_model=SensorDataResponse)
 def post_sensor_data(data: SensorDataCreate, db: Session = Depends(get_db)):
     """
@@ -50,7 +50,7 @@ def post_sensor_data(data: SensorDataCreate, db: Session = Depends(get_db)):
     return sensor_data
 
 
-# GET /data endpoint to query sensor data with optional filters and aggregation.
+#GET /data endpoint to query sensor data with optional filters and aggregation.
 @router.get("/")
 def query_sensor_data(
     server_ulid: Optional[str] = None,
@@ -61,7 +61,6 @@ def query_sensor_data(
     db: Session = Depends(get_db),
     current_user: str = Depends(get_current_user)
 ):
-    # Validate sensor_type and aggregation
     allowed_sensors = {"temperature", "humidity", "voltage", "current"}
     allowed_aggregations = {"minute", "hour", "day"}
 
@@ -72,7 +71,6 @@ def query_sensor_data(
     if aggregation and aggregation not in allowed_aggregations:
         raise HTTPException(status_code=400, detail="Invalid aggregation value")
 
-    # Base query on SensorData
     query = db.query(models.SensorData)
 
     if server_ulid:
@@ -85,7 +83,7 @@ def query_sensor_data(
     sensor_column = getattr(models.SensorData, sensor_type)
 
     if aggregation:
-        # Using PostgreSQL date_trunc function to group by desired interval
+        
         truncated = func.date_trunc(aggregation, models.SensorData.timestamp).label("timestamp")
         avg_value = func.avg(sensor_column).label("value")
         results = (

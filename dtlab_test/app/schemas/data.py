@@ -30,14 +30,14 @@ class SensorDataBase(BaseModel):
 class SensorDataCreate(SensorDataBase):
     pass
 
-# Schema for returning sensor data in responses
+#Schema for returning sensor data in responses
 class SensorDataResponse(SensorDataBase):
     id: int
 
-# Schema for returning a sensor data query response (with aggregation)
+#Schema for returning a sensor data query response (with aggregation)
 class SensorDataQueryResponse(BaseModel):
     timestamp: datetime
     value: float
 
     class Config:
-        from_attributes = True  # Enable compatibility with ORM objects
+        from_attributes = True  #Enable compatibility with ORM objects
