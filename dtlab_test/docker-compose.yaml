@@ -1,28 +1,32 @@
-
 services:
   db:
     image: postgres:15
+    container_name: dtlab_postgres
     restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: dtlabdb
-      TZ: UTC
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dtlabdb"]
+      interval: 5s
+      retries: 5
 
-  app:
+  api:
     build: .
+    container_name: dtlab_api
     restart: always
     depends_on:
-      - db
-    environment:
-      DATABASE_URL: "postgresql://root:123456@db:5432/dtlabdb"
-      SECRET_KEY: "your_secret_key_here"
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
     ports:
       - "8000:8000"
 
 volumes:
-  postgres_data:
+  pgdata:
