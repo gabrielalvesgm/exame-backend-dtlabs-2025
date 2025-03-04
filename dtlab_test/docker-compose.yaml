@@ -1,0 +1,28 @@
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: dtlabdb
+      TZ: UTC
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://root:123456@db:5432/dtlabdb"
+      SECRET_KEY: "your_secret_key_here"
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres_data:

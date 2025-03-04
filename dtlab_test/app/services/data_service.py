@@ -3,23 +3,13 @@
 from sqlalchemy.orm import Session
 from app.db import models
 from app.schemas.data import SensorDataCreate
+from datetime import timezone
 
 
 def register_sensor_data(db: Session, data: SensorDataCreate):
-    """
-    Register sensor data in the database.
-    Verifies if the server exists before inserting data.
-    Returns the sensor data record if successful, or None if the server is not found.
-    """
-    
-    #Checking if server is valid by ulid
-    server = db.query(models.Server).filter(models.Server.server_ulid == data.server_ulid)
-    if not server:
-        return None
-    
     sensor_data = models.SensorData(
         server_ulid=data.server_ulid,
-        timestamp=data.timestamp,
+        timestamp=data.timestamp.astimezone(timezone.utc),
         temperature=data.temperature,
         humidity=data.humidity,
         voltage=data.voltage,

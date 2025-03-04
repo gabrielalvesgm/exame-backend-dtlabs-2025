@@ -60,7 +60,8 @@ def test_server_health_offline():
     server_ulid = server_data["server_ulid"]
 
     # Insert an old timestamp simulating offline status
-    old_time_iso = (datetime.now(timezone.utc) - timedelta(seconds=999999)).isoformat(timespec="seconds")
+    old_time_iso = (datetime.now(timezone.utc) - timedelta(seconds=30)).isoformat()
+    
     sensor_payload = {
         "server_ulid": server_ulid,
         "timestamp": old_time_iso,

@@ -12,14 +12,13 @@ class SensorDataBase(BaseModel):
     voltage: Optional[float] = None      # Voltage in volts
     current: Optional[float] = None      # Current in ampere
 
-    # Ensure the timestamp is timezone-aware (assume UTC if naive)
     @model_validator(mode="after")
     def ensure_timestamp_aware(self):
         if self.timestamp.tzinfo is None:
             self.timestamp = self.timestamp.replace(tzinfo=timezone.utc)
         return self
 
-    # Validate that at least one sensor value is provided
+    #Validate that at least one sensor value is provided
     @model_validator(mode="after")
     def check_at_least_one_sensor(self):
         sensors = [self.temperature, self.humidity, self.voltage, self.current]
@@ -27,7 +26,7 @@ class SensorDataBase(BaseModel):
             raise ValueError("At least one sensor value must be provided.")
         return self
 
-# Schema to create a sensor data (used in POST /data)
+#Schema to create a sensor data (used in POST /data)
 class SensorDataCreate(SensorDataBase):
     pass
 
